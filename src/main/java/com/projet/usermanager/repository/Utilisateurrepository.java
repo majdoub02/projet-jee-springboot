@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface Utilisateurrepository extends JpaRepository<Utilisateur, Long> {
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> {
     Optional<Utilisateur> findByEmail(String email);
     boolean existsByEmail(String email);
 
@@ -19,4 +19,5 @@ public interface Utilisateurrepository extends JpaRepository<Utilisateur, Long> 
     Page<Utilisateur> search(@Param("q") String query, Pageable pageable);
 
     Page<Utilisateur> findByActif(boolean actif, Pageable pageable);
+    
 }

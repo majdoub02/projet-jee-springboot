@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "historique_actions")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
-public class Historiqueaction {
+public class HistoriqueAction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
