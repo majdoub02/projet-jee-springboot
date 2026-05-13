@@ -1,0 +1,4 @@
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.full-width { width: 100%; }
+.badge-active { background: #dcfce7; color: #16a34a; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }
+.badge-inactive { background: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }

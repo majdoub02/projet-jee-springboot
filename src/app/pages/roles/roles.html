@@ -1,0 +1,38 @@
+<div class="page">
+  <div class="page-header">
+    <h2>Rôles</h2>
+    <button mat-raised-button color="primary"><mat-icon>add</mat-icon> Nouveau rôle</button>
+  </div>
+
+  <mat-card>
+    <mat-card-content>
+      <table mat-table [dataSource]="roles" class="full-width">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Rôle</th>
+          <td mat-cell *matCellDef="let r"><strong>{{ r.name }}</strong></td>
+        </ng-container>
+        <ng-container matColumnDef="permissions">
+          <th mat-header-cell *matHeaderCellDef>Permissions</th>
+          <td mat-cell *matCellDef="let r">
+            <mat-chip-set>
+              <mat-chip *ngFor="let p of r.permissions">{{ p }}</mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="users">
+          <th mat-header-cell *matHeaderCellDef>Utilisateurs</th>
+          <td mat-cell *matCellDef="let r">{{ r.users }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let r">
+            <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button color="warn"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

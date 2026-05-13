@@ -1,0 +1,5 @@
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.full-width { width: 100%; }
+.badge-login { background: #dbeafe; color: #1d4ed8; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }
+.badge-update { background: #fef9c3; color: #a16207; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }
+.badge-delete { background: #fee2e2; color: #dc2626; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; }

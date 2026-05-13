@@ -1,0 +1,50 @@
+<div class="dashboard">
+  <div class="page-title">
+    <h2>Tableau de bord</h2>
+    <p>Vue d'ensemble de votre système</p>
+  </div>
+
+  <div class="stats-grid" *ngIf="!loading">
+    <mat-card *ngFor="let stat of statCards" class="stat-card">
+      <div class="stat-icon" [style.background]="stat.bg">
+        <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
+      </div>
+      <div class="stat-info">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </mat-card>
+  </div>
+
+  <mat-card class="recent-card" *ngIf="!loading">
+    <mat-card-header>
+      <mat-card-title>Activité récente</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <table mat-table [dataSource]="recentLogs" class="full-width">
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let l">{{ l.dateAction | date:'dd/MM/yyyy HH:mm' }}</td>
+        </ng-container>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
+          <td mat-cell *matCellDef="let l">{{ l.utilisateur?.prenom }} {{ l.utilisateur?.nom }}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let l"><span [class]="getActionClass(l.action)">{{ l.action }}</span></td>
+        </ng-container>
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef>Détails</th>
+          <td mat-cell *matCellDef="let l">{{ l.details }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['date','user','action','details']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['date','user','action','details'];"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="loading-center" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

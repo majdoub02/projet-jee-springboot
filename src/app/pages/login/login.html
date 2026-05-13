@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-left">
+    <div class="brand">
+      <mat-icon>shield</mat-icon>
+      <span>UserManager</span>
+    </div>
+    <h1>Bienvenue sur votre<br><span>panneau d'administration</span></h1>
+    <p>Gérez vos utilisateurs, rôles et permissions en toute sécurité.</p>
+  </div>
+
+  <div class="login-right">
+    <mat-card class="login-card">
+      <div class="card-header">
+        <mat-icon class="card-icon">lock</mat-icon>
+        <h2>Connexion</h2>
+        <p>Entrez vos identifiants pour accéder</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Adresse email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="admin@example.com">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="form.get('email')?.hasError('email')">Email invalide</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mot de passe</mat-label>
+          <input matInput formControlName="motDePasse" [type]="hidePassword ? 'password' : 'text'">
+          <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="login-btn" type="submit" [disabled]="form.invalid || loading">
+          <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+          <span *ngIf="!loading">Se connecter</span>
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</div>
