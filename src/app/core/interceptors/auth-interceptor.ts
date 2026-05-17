@@ -10,9 +10,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('jwt_token');
-    if (token) {
-      req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-    }
+if (token) {
+  req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
+}
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {

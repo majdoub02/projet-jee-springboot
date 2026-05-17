@@ -30,12 +30,12 @@ export class UsersComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      nom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: [''],
-      roleId: ['', Validators.required]
-    });
+  nom: ['', Validators.required],
+  prenom: ['', Validators.required],
+  email: ['', [Validators.required, Validators.email]],
+  motDePasse: [''],  // ✅ motDePasse au lieu de password
+  roleId: ['', Validators.required]
+});
   }
 
   ngOnInit() {
@@ -57,7 +57,12 @@ export class UsersComponent implements OnInit {
     this.loadUsers();
   }
 
-  openCreate() { this.editingUser = null; this.form.reset(); this.form.get('password')?.setValidators(Validators.required); this.showForm = true; }
+openCreate() { 
+  this.editingUser = null; 
+  this.form.reset(); 
+  this.form.get('motDePasse')?.setValidators(Validators.required); // ✅
+  this.showForm = true; 
+}
 
   openEdit(user: User) {
     this.editingUser = user;

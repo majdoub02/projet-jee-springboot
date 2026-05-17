@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface User {
   id: number;
@@ -21,7 +22,7 @@ export interface PageResponse<T> {
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private api = 'http://localhost:8080/api/users';
+  private api = `${environment.apiUrl}/users`;
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +30,10 @@ export class UserService {
     let params = new HttpParams().set('page', page).set('size', size);
     if (search) params = params.set('search', search);
     return this.http.get<PageResponse<User>>(this.api, { params });
+  }
+
+  getById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.api}/${id}`);
   }
 
   create(data: any): Observable<User> {

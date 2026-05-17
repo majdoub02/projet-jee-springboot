@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     forkJoin({
-      users: this.userService.getAll(0, 1000),
+      users: this.userService.getAll(0, 10),
       roles: this.roleService.getAll(),
       audit: this.auditService.getAll(0, 5)
     }).subscribe({

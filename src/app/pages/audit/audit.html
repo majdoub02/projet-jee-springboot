@@ -1,23 +1,31 @@
 <div class="page">
   <div class="page-header">
-    <h2>Journal d'audit</h2>
+    <div>
+      <h2>Journal d'audit</h2>
+      <p>{{ totalElements }} actions enregistrées</p>
+    </div>
   </div>
+
   <mat-card>
     <mat-card-content>
+      <div *ngIf="loading"><mat-progress-bar mode="indeterminate"></mat-progress-bar></div>
       <table mat-table [dataSource]="logs" class="full-width">
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef>Date</th>
-          <td mat-cell *matCellDef="let l">{{ l.date }}</td>
+          <th mat-header-cell *matHeaderCellDef>Date & Heure</th>
+          <td mat-cell *matCellDef="let l">{{ l.dateAction | date:'dd/MM/yyyy HH:mm:ss' }}</td>
         </ng-container>
         <ng-container matColumnDef="user">
           <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
-          <td mat-cell *matCellDef="let l">{{ l.user }}</td>
+          <td mat-cell *matCellDef="let l">
+            <div class="user-cell">
+              <div class="mini-avatar">{{ (l.utilisateur?.prenom?.[0] || '') + (l.utilisateur?.nom?.[0] || '') }}</div>
+              <span>{{ l.utilisateur?.prenom }} {{ l.utilisateur?.nom }}</span>
+            </div>
+          </td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
-          <td mat-cell *matCellDef="let l">
-            <span [class]="'badge-' + l.action.toLowerCase()">{{ l.action }}</span>
-          </td>
+          <td mat-cell *matCellDef="let l"><span [class]="getActionClass(l.action)">{{ l.action }}</span></td>
         </ng-container>
         <ng-container matColumnDef="details">
           <th mat-header-cell *matHeaderCellDef>Détails</th>
@@ -26,6 +34,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator [length]="totalElements" [pageSize]="pageSize"
+        [pageSizeOptions]="[10,20,50]" (page)="onPage($event)" showFirstLastButtons>
+      </mat-paginator>
     </mat-card-content>
   </mat-card>
 </div>

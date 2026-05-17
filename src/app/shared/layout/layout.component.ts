@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
-@Component({ selector: 'app-layout', standalone: false, templateUrl: './layout.html', styleUrl: './layout.css' })
+@Component({
+  selector: 'app-layout',
+  standalone: false,
+  templateUrl: './layout.html',
+  styleUrl: './layout.css'
+})
 export class LayoutComponent {
   menuItems = [
     { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' },
@@ -10,6 +15,10 @@ export class LayoutComponent {
     { label: 'Audit', icon: 'history', route: '/audit' },
   ];
 
-  constructor(public auth: AuthService) {}
-  logout() { this.auth.logout(); }
+  constructor(private router: Router) {}
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

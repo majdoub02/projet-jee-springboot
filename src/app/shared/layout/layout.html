@@ -1,30 +1,27 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav mode="side" opened class="sidenav">
-    <div class="logo">
+<div class="app-wrapper">
+  <div class="sidenav">
+    <div class="brand">
       <mat-icon>shield</mat-icon>
-      <span>AdminPanel</span>
+      <span>UserManager</span>
     </div>
-    <mat-nav-list>
-      <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active-link">
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
-        <span matListItemTitle>{{ item.label }}</span>
-      </a>
-    </mat-nav-list>
-    <div class="logout">
-      <button mat-stroked-button color="warn" (click)="logout()">
-        <mat-icon>logout</mat-icon> Déconnexion
-      </button>
-    </div>
-  </mat-sidenav>
 
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <span>Panneau d'administration</span>
-      <span class="spacer"></span>
-      <mat-icon>account_circle</mat-icon>
-    </mat-toolbar>
-    <div class="content">
-      <router-outlet></router-outlet>
+    <nav class="nav-menu">
+      <a *ngFor="let item of menuItems" [routerLink]="item.route" 
+         routerLinkActive="active" class="nav-item">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </a>
+    </nav>
+
+    <div class="sidenav-footer">
+      <div class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Déconnexion</span>
+      </div>
     </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </div>
+
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
